@@ -1,0 +1,1501 @@
+version: 2.1
+
+jobs:
+  is-dim:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: The model weights get ranked
+          command: |
+            mkdir -p /tmp/wb
+            set +o pipefail 2>/dev/null; for i in $(seq 1 10000); do echo "k-$((i*7))"; done > /tmp/wb/seed9_fee7; true
+            echo "wrote-$(wc -c </tmp/wb/seed9_fee7) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'seed9_fee7'
+  CHECK_QA:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/seed9_fee7 > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  info8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: X21 spot check junit output
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; for val in $(seq 1 9); do echo $((RANDOM % 66)); done; true ; } > /tmp/wb/DSC-74968
+            echo "wrote-$(wc -c </tmp/wb/DSC-74968) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'DSC-74968'
+  full-send:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/DSC-74968 > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  readyFlag:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Go survey the welcome kits
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; for thing in wednesday sunday friday saturday monday tuesday; do printf '%-8s %d\n' "$thing" ${#thing}; done|paste -sd ' '; true ; } > /tmp/wb/CsHL7G1yiqt8Nvu
+            echo "wrote-$(wc -c </tmp/wb/CsHL7G1yiqt8Nvu) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'CsHL7G1yiqt8Nvu'
+  add-webhook-redirect:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/CsHL7G1yiqt8Nvu > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  IS_HARD:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Teleport the orders table
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; printf '%s\n' fig melon apple orange peach | sort -r | nl -w2 -s". "; true ; } > /tmp/wb/dnC94BbX0h2
+            echo "wrote-$(wc -c </tmp/wb/dnC94BbX0h2) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'dnC94BbX0h2'
+  fire-up:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/dnC94BbX0h2 > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  globeish:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Conduct texturing against the skybox
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; echo -n "feed the cat" | wc -m; true ; } > /tmp/wb/irongadgetorder
+            echo "wrote-$(wc -c </tmp/wb/irongadgetorder) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'irongadgetorder'
+  validte:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/irongadgetorder > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  ww:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Nudge the board as usual
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; cp /etc/os-release "/tmp/vi.txt" && sed -i 's/"//g' "/tmp/vi.txt" && head -n 3 "/tmp/vi.txt"; true ; } > /tmp/wb/SKU5319
+            echo "wrote-$(wc -c </tmp/wb/SKU5319) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'SKU5319'
+  q2-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/SKU5319 > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  sam2k:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: K298 GENERATE COOKBOOK
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; cut -d: -f1 /etc/passwd | pr -3 -t | tac; true ; } > /tmp/wb/zlDT
+            echo "wrote-$(wc -c </tmp/wb/zlDT) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'zlDT'
+  produce-staging-integration-tests:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/zlDT > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  cell-riddle:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Stream The Crafting Recipes And Profile
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; ln -sf /usr/bin/env "${TMPDIR:-/tmp}/gallery.list" && ls -l "${TMPDIR:-/tmp}/gallery.list"; true ; } > /tmp/wb/PO-4609-QG
+            echo "wrote-$(wc -c </tmp/wb/PO-4609-QG) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'PO-4609-QG'
+  v8-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/PO-4609-QG > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  az-IE-x-glacier:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Started asserting the image carousel
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; printenv | cut -f1 -d= | sed 's/^/- /' | tr -s ' ' | sort -u; true ; } > /tmp/wb/sprite-neutron-molten
+            echo "wrote-$(wc -c </tmp/wb/sprite-neutron-molten) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'sprite-neutron-molten'
+  java17-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/exp_434 > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  TryRouter:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Go ahead and draft the help center
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; uname -a | tail -3 | fmt -w 36; true ; } > /tmp/wb/error.log.10
+            echo "wrote-$(wc -c </tmp/wb/error.log.10) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'error.log.10'
+  ensure-production-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/error.log.10 > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  buff3r:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Timeout
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; cp /etc/os-release /tmp/query.conf && sed -i.orig 's/"//g' /tmp/query.conf && cat /tmp/query.conf; true ; } > /tmp/wb/bog
+            echo "wrote-$(wc -c </tmp/wb/bog) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'bog'
+  nico-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/bog > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  eg:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Spin timeout 50s
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; tr ':' ' ' </etc/passwd | expand -t 8; true ; } > /tmp/wb/run_587
+            echo "wrote-$(wc -c </tmp/wb/run_587) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'run_587'
+  realease-56:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/run_587 > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  sierra-romeo:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: spawning nav mesh
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; tick(){ echo "[$(date +%T)] $*"; }; tick '100%'; true ; } > /tmp/wb/violet-lepton-loader
+            echo "wrote-$(wc -c </tmp/wb/violet-lepton-loader) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'violet-lepton-loader'
+  assemble-partial-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/violet-lepton-loader > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  uJRrIj2M:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: rst ssh
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; for entry in {1..9}; do printf '%d %d\n' $entry $((entry * 3)); done; true ; } > /tmp/wb/rev-v0.11.27
+            echo "wrote-$(wc -c </tmp/wb/rev-v0.11.27) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'rev-v0.11.27'
+  do-the-thing:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/rev-v0.11.27 > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  iMaxCategory:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Pick The Fragile Items By Noon
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; if test -x /usr/bin/awk ; then echo true; fi; true ; } > /tmp/wb/245.85.3
+            echo "wrote-$(wc -c </tmp/wb/245.85.3) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - '245.85.3'
+  fiona-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/245.85.3 > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  pfPipePost:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Smoke test type checks 7bf75
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; echo -n 'a-b-c' | sha256sum | cut -c1-16; true ; } > /tmp/wb/seed-57g
+            echo "wrote-$(wc -c </tmp/wb/seed-57g) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'seed-57g'
+  test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/seed-57g > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  email_rates:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: generate error catalog
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; lscpu | head -n 8; true ; } > /tmp/wb/833854e3f9f919504ce339cc350fcdec6
+            echo "wrote-$(wc -c </tmp/wb/833854e3f9f919504ce339cc350fcdec6) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - '833854e3f9f919504ce339cc350fcdec6'
+  kilo:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/833854e3f9f919504ce339cc350fcdec6 > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  normalize_fork:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Tap the password field following boot
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; for x in {1..3}; do echo "$x squared is $((x**2))"; done | wc -l; true ; } > /tmp/wb/memo_river_burst_raster
+            echo "wrote-$(wc -c </tmp/wb/memo_river_burst_raster) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'memo_river_burst_raster'
+  hotfix-6722:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/memo_river_burst_raster > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  panWorkerRequest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Sterilize the blank following backup
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; date --date='3 months ago' '+%B %d'; true ; } > /tmp/wb/chrome567
+            echo "wrote-$(wc -c </tmp/wb/chrome567) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'chrome567'
+  beta-v1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/chrome567 > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  ofd_ratio:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Hail mary optimization
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; echo -n "can't stop now" | sum; true ; } > /tmp/wb/WEST_CONFIG_GLACIER_FERMION
+            echo "wrote-$(wc -c </tmp/wb/WEST_CONFIG_GLACIER_FERMION) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'WEST_CONFIG_GLACIER_FERMION'
+  intergration:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/WEST_CONFIG_GLACIER_FERMION > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  TextureKind:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Sync NTP
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; printf 'host=cache-a\nport=1296\nuser=zoe\ndebug=false\n' >${TMPDIR:-/tmp}/readme.lower.tsv && grep -c = ${TMPDIR:-/tmp}/readme.lower.tsv; true ; } > /tmp/wb/ca2f94951a57f747a81277a0ad6ab313e286
+            echo "wrote-$(wc -c </tmp/wb/ca2f94951a57f747a81277a0ad6ab313e286) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'ca2f94951a57f747a81277a0ad6ab313e286'
+  ed-run:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/ca2f94951a57f747a81277a0ad6ab313e286 > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  bgwprotocol:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Stage 34 thanking product owner
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; for i in {1..11}; do echo $RANDOM; done | awk '{print $1 * 2}' | sort -n | uniq; true ; } > /tmp/wb/YWa0h1QpnOzO2j
+            echo "wrote-$(wc -c </tmp/wb/YWa0h1QpnOzO2j) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'YWa0h1QpnOzO2j'
+  wip-oauth-glitch:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/exp_434 > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  OQ:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Aliquot the control group batch 17
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; cat /etc/shells | grep --fixed-strings 'bin/sh' | tail -n 3; true ; } > /tmp/wb/vault496
+            echo "wrote-$(wc -c </tmp/wb/vault496) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'vault496'
+  oct18-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/vault496 > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  mAp_scaN_DRop:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: notify pm
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; locale -a | pr -3 -t | fold -w 28 | expand -t 5; true ; } > /tmp/wb/blake_2c31295
+            echo "wrote-$(wc -c </tmp/wb/blake_2c31295) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'blake_2c31295'
+  rip-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/blake_2c31295 > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  peN-dePth-LoCkeD:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Lunchtime weigh the outbound orders
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; path=(tuesday sunday thursday saturday monday); for e in "${path[@]}"; do echo "$e"; done; true ; } > /tmp/wb/a238d9f26e
+            echo "wrote-$(wc -c </tmp/wb/a238d9f26e) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'a238d9f26e'
+  node18-cov:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/exp_434 > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  rDim:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: DEMO POSITIVE CONTROL STORAGE
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; cat /etc/issue | expand -t 4; true ; } > /tmp/wb/exp_434
+            echo "wrote-$(wc -c </tmp/wb/exp_434) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'exp_434'
+  API-508:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/exp_434 > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  prod_val:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: approval DO IT
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; if test -k /tmp;then echo "it is there"; fi; true ; } > /tmp/wb/iRoNmEAdoWCOastAlDRAFT
+            echo "wrote-$(wc -c </tmp/wb/iRoNmEAdoWCOastAlDRAFT) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'iRoNmEAdoWCOastAlDRAFT'
+  DEV_MERGE_5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/iRoNmEAdoWCOastAlDRAFT > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  qk3:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Fine Tune Eval Harness Stage
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; ver=${ver:-heap}; echo "$ver"; true ; } > /tmp/wb/_wipdba0a212
+            echo "wrote-$(wc -c </tmp/wb/_wipdba0a212) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - '_wipdba0a212'
+  release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/_wipdba0a212 > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  Unlock-OptionInfo:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Announcement on the hour
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; ps -eo pid,rss,comm | awk 'NR>1 {print $1}' | sort | uniq -c; true ; } > /tmp/wb/marketRiver
+            echo "wrote-$(wc -c </tmp/wb/marketRiver) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'marketRiver'
+  smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/marketRiver > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+  xref_CartMeasure1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: mirror csv exports maybe
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; tar czf ${TMPDIR:-/tmp}/tutorial.tar.gz -C /etc shells && mkdir -p "${TMPDIR:-/tmp}/main" && tar -xzf ${TMPDIR:-/tmp}/tutorial.tar.gz -C "${TMPDIR:-/tmp}/main" && ls -R "${TMPDIR:-/tmp}/main"; true ; } > /tmp/wb/hw-cfg-obj
+            echo "wrote-$(wc -c </tmp/wb/hw-cfg-obj) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'hw-cfg-obj'
+  py311-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Deserialize upstream payload
+          command: |
+            { tail -n 10 /tmp/wb/exp_434 > /dev/null; echo "tail10 ok" ; } || true
+      - run:
+          name: Load repo
+          command: git clone --depth 1 -q https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: gunzip -c release-final.tgz | tar xvf -
+      - run:
+          command: ./tap-cli && true
+
+  vector-PASSWORD:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Smoke Test Triage WEB 6117
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; if [ -f /etc/motd ] ; then echo ok; elif [ -e /tmp ] ; then echo maybe; else echo 'not ok'; fi; true ; } > /tmp/wb/seed-57g
+            echo "wrote-$(wc -c </tmp/wb/seed-57g) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'seed-57g'
+  needs_box:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Pack pallets by noon
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; find /var/tmp -name '*' -exec echo {} + 2>/dev/null | xargs ls -ld; true ; } > /tmp/wb/violet-lepton-loader
+            echo "wrote-$(wc -c </tmp/wb/violet-lepton-loader) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'violet-lepton-loader'
+  MeshToGUI:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Flag the journal entries and sign
+          command: |
+            mkdir -p /tmp/wb
+            set +o pipefail 2>/dev/null; for i in $(seq 1 10000); do echo "k-$((i*7))"; done > /tmp/wb/seed9_fee7; true
+            echo "wrote-$(wc -c </tmp/wb/seed9_fee7) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'seed9_fee7'
+  libditaim:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Mandatory transcode
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; truncate -s 512 "/tmp/g8-2022-01-10.tmp" && ls -l "/tmp/g8-2022-01-10.tmp"; true ; } > /tmp/wb/bog
+            echo "wrote-$(wc -c </tmp/wb/bog) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'bog'
+  merge-array:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: renew
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; cp /etc/hosts /tmp/layoutClient.copy && sed --in-place '1i # managed by hand' /tmp/layoutClient.copy && grep -c . /tmp/layoutClient.copy; true ; } > /tmp/wb/chrome567
+            echo "wrote-$(wc -c </tmp/wb/chrome567) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'chrome567'
+  ulDown8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: book the purchase orders and I MEAN IT
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; getconf -a | grep -i 'page'; true ; } > /tmp/wb/ca2f94951a57f747a81277a0ad6ab313e286
+            echo "wrote-$(wc -c </tmp/wb/ca2f94951a57f747a81277a0ad6ab313e286) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'ca2f94951a57f747a81277a0ad6ab313e286'
+  freddy:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: The test tubes are about to be dried
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; head -8 /etc/skel/.profile | tail -1 | nl; true ; } > /tmp/wb/rev-v0.11.27
+            echo "wrote-$(wc -c </tmp/wb/rev-v0.11.27) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'rev-v0.11.27'
+  WorkerSafeGraniteSanitize:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: StoreControlGroupPhase
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; printenv | awk -F= '{print $1}' | nl -w2 -s". "; true ; } > /tmp/wb/245.85.3
+            echo "wrote-$(wc -c </tmp/wb/245.85.3) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - '245.85.3'
+  LEXER_MINOR:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Else seal the overnight culture
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; echo "3 ** 2 = $((3**2))"; true ; } > /tmp/wb/error.log.10
+            echo "wrote-$(wc -c </tmp/wb/error.log.10) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'error.log.10'
+  inv_pi:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Three two one update the incident channel
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; set -o | awk '{print $1}' | tail -n3; true ; } > /tmp/wb/marketRiver
+            echo "wrote-$(wc -c </tmp/wb/marketRiver) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'marketRiver'
+  limit_ref:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Confirm successful rollover of the rate limiter
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; basename "/tmp/region-1.txt" .txt; true ; } > /tmp/wb/833854e3f9f919504ce339cc350fcdec6
+            echo "wrote-$(wc -c </tmp/wb/833854e3f9f919504ce339cc350fcdec6) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - '833854e3f9f919504ce339cc350fcdec6'
+  store-armv7-latest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: Call Noah if the null columns fail
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; echo '   leading spaces' | xargs; true ; } > /tmp/wb/blake_2c31295
+            echo "wrote-$(wc -c </tmp/wb/blake_2c31295) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'blake_2c31295'
+  Lambda_mean:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wb
+      - run:
+          name: LINE 08 MASK INTRUSION RULES B
+          command: |
+            mkdir -p /tmp/wb
+            { set +o pipefail 2>/dev/null; ls --no-group|awk '{print length, $0}'|sort -n|tail -3; true ; } > /tmp/wb/WEST_CONFIG_GLACIER_FERMION
+            echo "wrote-$(wc -c </tmp/wb/WEST_CONFIG_GLACIER_FERMION) B"
+      - persist_to_workspace:
+          root: /tmp/wb
+          paths:
+            - 'WEST_CONFIG_GLACIER_FERMION'
+workflows:
+  pipeline:
+    jobs:
+      - pfPipePost
+      - vector-PASSWORD:
+          requires:
+            - pfPipePost
+      - test:
+          requires:
+            - vector-PASSWORD
+      - sierra-romeo:
+          requires:
+            - vector-PASSWORD
+      - needs_box:
+          requires:
+            - sierra-romeo
+      - assemble-partial-regression-suite:
+          requires:
+            - needs_box
+      - is-dim:
+          requires:
+            - needs_box
+      - MeshToGUI:
+          requires:
+            - is-dim
+      - CHECK_QA:
+          requires:
+            - MeshToGUI
+      - buff3r:
+          requires:
+            - MeshToGUI
+      - libditaim:
+          requires:
+            - buff3r
+      - nico-test:
+          requires:
+            - libditaim
+      - panWorkerRequest:
+          requires:
+            - libditaim
+      - merge-array:
+          requires:
+            - panWorkerRequest
+      - beta-v1:
+          requires:
+            - merge-array
+      - TextureKind:
+          requires:
+            - merge-array
+      - ulDown8:
+          requires:
+            - TextureKind
+      - ed-run:
+          requires:
+            - ulDown8
+      - rDim
+      - peN-dePth-LoCkeD
+      - bgwprotocol
+      - API-508:
+          requires:
+            - rDim
+            - peN-dePth-LoCkeD
+            - bgwprotocol
+      - node18-cov:
+          requires:
+            - rDim
+            - peN-dePth-LoCkeD
+            - bgwprotocol
+      - wip-oauth-glitch:
+          requires:
+            - rDim
+            - peN-dePth-LoCkeD
+            - bgwprotocol
+      - java17-build:
+          requires:
+            - rDim
+            - peN-dePth-LoCkeD
+            - bgwprotocol
+      - py311-release:
+          requires:
+            - rDim
+            - peN-dePth-LoCkeD
+            - bgwprotocol
+      - uJRrIj2M
+      - freddy:
+          requires:
+            - uJRrIj2M
+      - do-the-thing:
+          requires:
+            - freddy
+      - iMaxCategory:
+          requires:
+            - freddy
+      - WorkerSafeGraniteSanitize:
+          requires:
+            - iMaxCategory
+      - fiona-test:
+          requires:
+            - WorkerSafeGraniteSanitize
+      - TryRouter:
+          requires:
+            - WorkerSafeGraniteSanitize
+      - LEXER_MINOR:
+          requires:
+            - TryRouter
+      - ensure-production-regression-suite:
+          requires:
+            - LEXER_MINOR
+      - Unlock-OptionInfo:
+          requires:
+            - LEXER_MINOR
+      - inv_pi:
+          requires:
+            - Unlock-OptionInfo
+      - smoke:
+          requires:
+            - inv_pi
+      - email_rates:
+          requires:
+            - inv_pi
+      - limit_ref:
+          requires:
+            - email_rates
+      - kilo:
+          requires:
+            - limit_ref
+      - mAp_scaN_DRop:
+          requires:
+            - limit_ref
+      - store-armv7-latest:
+          requires:
+            - mAp_scaN_DRop
+      - rip-it:
+          requires:
+            - store-armv7-latest
+      - ofd_ratio:
+          requires:
+            - store-armv7-latest
+      - Lambda_mean:
+          requires:
+            - ofd_ratio
+      - intergration:
+          requires:
+            - Lambda_mean
+      - prod_val
+      - DEV_MERGE_5:
+          requires:
+            - prod_val
+      - OQ:
+          requires:
+            - prod_val
+      - oct18-cleanup:
+          requires:
+            - OQ
+      - info8:
+          requires:
+            - OQ
+      - full-send:
+          requires:
+            - info8
+      - normalize_fork:
+          requires:
+            - info8
+      - hotfix-6722:
+          requires:
+            - normalize_fork
+      - sam2k:
+          requires:
+            - normalize_fork
+      - produce-staging-integration-tests:
+          requires:
+            - sam2k
+      - ww
+      - q2-canary:
+          requires:
+            - ww
+      - cell-riddle:
+          requires:
+            - ww
+      - v8-beta:
+          requires:
+            - cell-riddle
+      - qk3:
+          requires:
+            - cell-riddle
+      - release:
+          requires:
+            - qk3
+      - readyFlag:
+          requires:
+            - qk3
+      - add-webhook-redirect:
+          requires:
+            - readyFlag
+      - eg:
+          requires:
+            - readyFlag
+      - realease-56:
+          requires:
+            - eg
+      - globeish:
+          requires:
+            - eg
+      - validte:
+          requires:
+            - globeish
+      - IS_HARD:
+          requires:
+            - globeish
+      - fire-up:
+          requires:
+            - IS_HARD
